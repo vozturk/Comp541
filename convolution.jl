@@ -1,3 +1,5 @@
+
+using Knet
 include(Pkg.dir("Knet","data","mnist.jl"))#include mnist related functions
 xtrn,ytrn,xtst,ytst =mnist()#data ready to use in convolutional neural networks
 
