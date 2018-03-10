@@ -18,7 +18,7 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
             x = h[i]
         end
     end
-    map(KnetArray,w)
+    map(KnetArray{Float32},w)
 end
 
 
@@ -82,8 +82,8 @@ h   = ((28,28,1), (5,5,3), 10);
 
 srand(your_seed)
 
-dtrn=minibatch(xtrn, ytrn, BATCHSIZE; xtype=KnetArray,ytype=KnetArray)
-dtst=minibatch(xtst, ytst, BATCHSIZE; xtype=KnetArray, ytype=KnetArray)#returns list of tuples of (x,y)
+dtrn=minibatch(xtrn, ytrn, BATCHSIZE; xtype=KnetArray{Float32},ytype=KnetArray{Float32})
+dtst=minibatch(xtst, ytst, BATCHSIZE; xtype=KnetArray{Float32}, ytype=KnetArray{Float32})#returns list of tuples of (x,y)
 
 
 weights = initweights(h);
