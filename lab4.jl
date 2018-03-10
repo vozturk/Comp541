@@ -60,14 +60,14 @@ end
 function loss(w,x,ygold)
     ypred=cnn(w,x)
     prob=logp(ypred,[1])
-    J=-sum(ygold.*prob)
+    J=-sum(ygold.*prob)/size(ygold,2)
     return J
 end
 
 lossgradient=grad(loss)
 
 function train(w, dtrn,Lr)
-    p = optimizers(weights, sgd(lr=Lr))
+    p = optimizers(w, sgd(lr=Lr))
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
             update!(w,g,p)
