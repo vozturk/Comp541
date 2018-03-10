@@ -88,14 +88,14 @@ function accuracy(weights, dtst, pred=cnn)
         nloss+= loss(w,x,y)
         ninstance += size(y,2)
     end
-    return (1-(ncorrect/ninstance), nloss/ninstance)
+    return (ncorrect/ninstance, nloss/ninstance)
 end
 
 #   MAIN LOOP
 
 # Hyperparameters
 your_seed = 1;
-EPOCHS    = 100;
+EPOCHS    = 10;
 BATCHSIZE = 100;
 LR        = 0.15;
 h   = ((28,28,1), (5,5,3), 10);
