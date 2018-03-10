@@ -44,7 +44,7 @@ end
 function cnet(w,x)
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
-            x=conv4(w[i],x;handle) .+ w[i+1]
+            x=conv4(w[i],x) .+ w[i+1]
             x=pool(sigm.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x=w[i]*mat(x) .+ w[i+1]
@@ -99,7 +99,7 @@ your_seed = 1;
 EPOCHS    = 100;
 BATCHSIZE = 100;
 LR        = 0.01;
-h   = ((28,28,1),(50,50,3),10)
+h   = ((28,28,1),(50,50,3),10);
 
 srand(your_seed)
 
@@ -120,10 +120,12 @@ dtst=minibatch(xtst, ytst, BATCHSIZE; xtype=KnetArray{Float32}, ytype=KnetArray{
 
 weights = initweights(h);
 
-println(accuracy(weights,dtrn)[1])
-println(accuracy(weights,dtrn)[2])
-println(accuracy(weights,dtst)[1])
-println(accuracy(weights,dtst)[2])
+a=accuracy(weights,dtrn)
+b=accuracy(weights,dtst)
+println(a[1])
+println(a[2])
+println(b[1])
+println(b[2])
 #report(epoch)=println(:epoch,epoch,:trn,accuracy(weights,dtrn))
 #report(0)
 
@@ -131,8 +133,10 @@ println(accuracy(weights,dtst)[2])
 @time for epoch=1:EPOCHS # @time helps you to have an idea about your convergence time
     train(weights, dtrn, LR)
     #report(epoch)
-    println(accuracy(weights,dtrn)[1])
-    println(accuracy(weights,dtrn)[2])
-    println(accuracy(weights,dtst)[1])
-    println(accuracy(weights,dtst)[2])
+    a=accuracy(weights,dtrn)
+    b=accuracy(weights,dtst)
+    println(a[1])
+    println(a[2])
+    println(b[1])
+    println(b[2])
 end
