@@ -40,12 +40,14 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
 end
 
 
-function vnet(w,x)
+function vnet(w,x,; pdrop=(0,0.5,0.5))
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
+            x = dropout(x, pdrop[i==1?1:2])
             x=conv4(w[i],x) .+ w[i+1]
             x=pool(sigm.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
+            x = dropout(x, pdrop[i==1?1:3])
             x=w[i]*mat(x) .+ w[i+1]
             if i < length(w)-1
                 x = sigm.(x)
@@ -65,7 +67,7 @@ end
 lossgradient=grad(loss)
 
 function train(w, dtrn, lr)
-    p=optimizers(w, Adam)
+    p=optimizers(w, Adagrad)
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
             update!(w,g,p)
@@ -94,10 +96,10 @@ end
 
 # Hyperparameters
 your_seed = 1;
-EPOCHS    = 100;
+EPOCHS    = 200;
 BATCHSIZE = 100;
 LR        = 0.01;
-h   = ((28,28,1), (5,5,3), 10);
+h   = ((28,28,1), (5,5,3),(3,3,3), 20, 10);
 
 srand(your_seed)
 
