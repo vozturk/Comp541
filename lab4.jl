@@ -65,8 +65,8 @@ function accuracy(weights, dtst, pred=cnn)
         ypred=pred(w,x)
         ypred[ypred.==maximum(ypred,1)] = 1
         ypred[ypred.!= maximum(ypred,1)] = 0
-        println(typeof(ypred))
-            println(typeof(y))
+        println(size(ypred))
+            println(size(y))
         ncorrect += sum(y .* ypred)
         nloss += loss(w,x,y)
         ninstance += size(y,2)
