@@ -57,9 +57,9 @@ end
 
 function accuracy(weights, dtst, pred=cnn)
     w = weights
-    ncorrect = 0
-    ninstance = 0
-    nloss = 0
+    ncorrect = 0.0
+    ninstance = 0.0
+    nloss = 0.0
     for (x,y) in dtst
         yhat=pred(w,x)
         for i=1:size(y, 2)
