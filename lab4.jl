@@ -27,9 +27,10 @@ function minibatch(X, Y, batchsize)
         push!(data, (X[:, i:bl], Y[:, i:bl]))
     end
     for (x,y) in data
-        convert(KnetArray,x)
-        convert(KnetArray,y)
+        x=convert(KnetArray,x)
+        y=convert(KnetArray,y)
     end
+    return data
 end
 
 function initweights(h...)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
