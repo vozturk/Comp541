@@ -63,7 +63,7 @@ function train(w, dtrn, lr)
 
 end
 
-function error(weights, dtst, pred=)
+function error(weights, dtst, pred=cnn)
     w = weights
     ncorrect = 0
     ninstance = 0
