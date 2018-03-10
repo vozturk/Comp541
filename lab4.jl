@@ -127,7 +127,6 @@ ytst = convert(Array{Float32}, sparse(convert(Vector{Int},ytstraw),1:length(ytst
 dtrn=minibatch(xtrn, ytrn, BATCHSIZE)
 dtst=minibatch(xtst, ytst, BATCHSIZE)#returns list of tuples of (x,y)
 
-first(dtrn)
 
 weights = initweights(h);
 
