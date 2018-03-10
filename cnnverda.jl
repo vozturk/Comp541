@@ -29,7 +29,7 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
             (w1,w2,cy) = h[i]
             push!(w, xavier(w1,w2,cx,cy))
             push!(w, zeros(1,1,cy,1))
-            x = (div(x1-w1+1,2),div(x2-w2+1,2),cy) # with default padding and pooling parameters
+            x = (div(x1-w1+1),div(x2-w2+1),cy) # with default padding and pooling parameters
         elseif isa(h[i],Integer)
             push!(w, xavier(h[i],prod(x)))
             push!(w, zeros(h[i],1))
@@ -45,7 +45,7 @@ function vnet(w,x,; pdrop=(0,0,0))
         if ndims(w[i])==4 #it means convolution layer
             x = dropout(x, pdrop[i==1?1:2])
             x=conv4(w[i],x) .+ w[i+1]
-            x=pool(relu.(x))
+            #x=pool(relu.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x = dropout(x, pdrop[i==1?1:3])
             x=w[i]*mat(x) .+ w[i+1]
@@ -67,9 +67,10 @@ end
 lossgradient=grad(loss)
 
 function train(w, dtrn, lr)
+    p=optimizers(w,Adam)
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
-            update!(w,g,Adam(lr=0.05))
+            update!(w,g,p)
         end
     return w
 
