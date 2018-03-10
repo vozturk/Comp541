@@ -29,7 +29,7 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
             (w1,w2,cy) = h[i]
             push!(w, xavier(w1,w2,cx,cy))
             push!(w, zeros(1,1,cy,1))
-            x = (div(x1-w1+1),div(x2-w2+1),cy) # with default padding and pooling parameters
+            x = (div(x1-w1+1,1),div(x2-w2+1,1),cy) # with default padding and pooling parameters
         elseif isa(h[i],Integer)
             push!(w, xavier(h[i],prod(x)))
             push!(w, zeros(h[i],1))
