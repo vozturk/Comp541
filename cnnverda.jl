@@ -67,10 +67,9 @@ end
 lossgradient=grad(loss)
 
 function train(w, dtrn, lr)
-    p=optimizers(w, Adam)
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
-            update!(w,g,p(lr=0.05))
+            update!(w,g,Adam(lr=0.05))
         end
     return w
 
