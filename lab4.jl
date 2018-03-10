@@ -122,7 +122,7 @@ weights = initweights(h);
 println(accuracy(weights,dtrn)[1])
 println(accuracy(weights,dtrn)[2])
 println(accuracy(weights,dtst)[1])
-println(accuracy(weights,dtrn)[2])
+println(accuracy(weights,dtst)[2])
 
 
 @time for epoch=1:EPOCHS # @time helps you to have an idea about your convergence time
@@ -130,5 +130,5 @@ println(accuracy(weights,dtrn)[2])
     println(accuracy(weights,dtrn)[1])
     println(accuracy(weights,dtrn)[2])
     println(accuracy(weights,dtst)[1])
-    println(accuracy(weights,dtrn)[2])
+    println(accuracy(weights,dtst)[2])
 end
