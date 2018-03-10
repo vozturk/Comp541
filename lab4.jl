@@ -69,7 +69,7 @@ lossgradient=grad(loss)
 function train(w, dtrn,lr)
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
-            update!(w,g,Adadelta)
+            update!(w,g,Adam())
         end
     return w
 
@@ -98,7 +98,7 @@ your_seed = 1;
 EPOCHS    = 10000;
 BATCHSIZE = 100;
 LR        = 0.01;
-h   = ((28,28,1),1000,10)
+h   = ((28,28,1),(50,50,3),10)
 
 srand(your_seed)
 
