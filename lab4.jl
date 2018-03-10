@@ -131,16 +131,16 @@ dtst=minibatch(xtst, ytst, BATCHSIZE)#returns list of tuples of (x,y)
 
 weights = initweights(h);
 
-println(error(weights,dtrn)[1])
-println(error(weights,dtrn)[2])
-println(error(weights,dtst)[1])
-println(error(weights,dtst)[2])
+
+println(error(weights,dtrn))
+println(error(weights,dtst))
+
 
 
 @time for epoch=1:EPOCHS # @time helps you to have an idea about your convergence time
     train(weights, dtrn, LR)
-    println(error(weights,dtrn)[1])
-    println(error(weights,dtrn)[2])
-    println(error(weights,dtst)[1])
-    println(error(weights,dtst)[2])
+    
+    println(error(weights,dtrn))
+    println(error(weights,dtst))
+   
 end
