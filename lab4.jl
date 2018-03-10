@@ -95,9 +95,9 @@ end
 
 # Hyperparameters
 your_seed = 1;
-EPOCHS    = 10;
+EPOCHS    = 100;
 BATCHSIZE = 100;
-LR        = 0.01;
+LR        = 0.15;
 h   = ((28,28,1), (5,5,3), 10);
 
 srand(your_seed)
