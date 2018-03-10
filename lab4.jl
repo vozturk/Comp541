@@ -45,11 +45,11 @@ function cnn(w,x)
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
             x=conv4(w[i],x) .+ w[i+1]
-            x=pool(relu.(x))
+            x=pool(sigm.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x=w[i]*mat(x) .+ w[i+1]
             if i < length(w)-1
-                x = relu.(x)
+                x = sigm.(x)
             end
         end
     end
