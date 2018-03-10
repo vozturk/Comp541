@@ -68,7 +68,7 @@ function accuracy(weights, dtst, pred=)
         end
         nloss+= loss(w,x,y)
     end
-    return ((ncorrect/ninstance), nloss/ninstance)
+    return (1-(ncorrect/ninstance), nloss/ninstance)
 end
 
 #   MAIN LOOP
@@ -88,16 +88,16 @@ dtst=minibatch(xtst, ytst, BATCHSIZE; xtype=KnetArray, ytype=KnetArray)#returns 
 
 weights = initweights(h);
 
-println(error(weights,dtrn)[1])
-println(error(weights,dtrn)[2])
-println(error(weights,dtst)[1])
-println(error(weights,dtrn)[2])
+println(accuracy(weights,dtrn)[1])
+println(accuracy(weights,dtrn)[2])
+println(accuracy(weights,dtst)[1])
+println(accuracy(weights,dtrn)[2])
 
 
 @time for epoch=1:EPOCHS # @time helps you to have an idea about your convergence time
     train(weights, dtrn, LR)
-    println(error(weights,dtrn)[1])
-    println(error(weights,dtrn)[2])
-    println(error(weights,dtst)[1])
-    println(error(weights,dtrn)[2])
+    println(accuracy(weights,dtrn)[1])
+    println(accuracy(weights,dtrn)[2])
+    println(accuracy(weights,dtst)[1])
+    println(accuracy(weights,dtrn)[2])
 end
