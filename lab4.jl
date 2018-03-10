@@ -44,7 +44,7 @@ end
 function cnet(w,x)
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
-            x=conv4(w[i],x) .+ w[i+1]
+            x=conv4(w[i],x;handle) .+ w[i+1]
             x=pool(sigm.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x=w[i]*mat(x) .+ w[i+1]
