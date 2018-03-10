@@ -45,11 +45,11 @@ function cnn(w,x)
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
             x=conv4(w[i],x) .+ w[i+1]
-            x=pool(sigm.(x))
+            x=pool(relu.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x=w[i]*mat(x) .+ w[i+1]
             if i < length(w)-1
-                x = sigm.(x)
+                x = relu.(x)
             end
         end
     end
@@ -66,11 +66,11 @@ end
 
 lossgradient=grad(loss)
 
-function train(w, dtrn, lr)
+function train(w, dtrn,lr)
+        opt=optimizers(w,Adagrad)
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
-            p=Adam(lr=lr)
-            update!(w,g,p)
+            update!(w,g,opt)
         end
     return w
 
