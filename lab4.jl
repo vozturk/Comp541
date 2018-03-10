@@ -92,12 +92,10 @@ function error(weights, dtst, pred=cnn)
     ninstance = 0
     nloss = 0
     for (x,y) in dtst
-        ypred = pred(w,x)
-        ypred[ypred.==maximum(ypred,1)] = 1
-        ypred[ypred.!= 1] = 0
-        ncorrect += sum(y .* ypred)
-        nloss += loss(w,x,y)
-        ninstance += size(y,2)
+        yhat=pred(w,x)
+        for i=1:size(y, 2)
+            ncorrect += indmax(y[:,i]) == indmax(yhat[:, i]) ? 1.0 : 0.0
+            ninstance+=1
     end
     return (1.0-(ncorrect/ninstance), nloss/ninstance)
 end
