@@ -55,7 +55,7 @@ function train(w, dtrn, lr)
 
 end
 
-function accuracy(weights, dtst, pred=)
+function accuracy(weights, dtst, pred=cnn)
     w = weights
     ncorrect = 0
     ninstance = 0
