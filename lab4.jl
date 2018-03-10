@@ -34,6 +34,7 @@ function cnn(w,x)
             end
         end
     end
+    println(typeof(x))
     return x
 end
 
