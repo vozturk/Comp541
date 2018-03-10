@@ -69,7 +69,7 @@ lossgradient=grad(loss)
 function train(w, dtrn,lr)
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
-            update!(w,g,lr=lr)
+            update!(w,g,Adagrad)
         end
     return w
 
