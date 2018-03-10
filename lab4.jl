@@ -41,7 +41,7 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
 end
 
 
-function cnn(w,x)
+function cnet(w,x)
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
             x=conv4(w[i],x) .+ w[i+1]
@@ -58,7 +58,7 @@ function cnn(w,x)
 end
 
 function loss(w,x,ygold)
-    ypred=cnn(w,x)
+    ypred=cnet(w,x)
     prob=logp(ypred,[1])
     J=-sum(ygold.*prob)/size(ygold,2)
     return J
@@ -76,7 +76,7 @@ function train(w, dtrn,Lr)
 
 end
 
-function accuracy(weights, dtst, pred=cnn)
+function accuracy(weights, dtst, pred=cnet)
     w = weights
     ncorrect = 0.0
     ninstance = 0.0
