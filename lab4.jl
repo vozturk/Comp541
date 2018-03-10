@@ -98,7 +98,7 @@ your_seed = 1;
 EPOCHS    = 100;
 BATCHSIZE = 100;
 LR        = 0.01;
-h   = ((28,28,1), (50,50,3),10);
+h   = ((28,28,1),50,50,10)
 
 srand(your_seed)
 
