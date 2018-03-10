@@ -29,7 +29,7 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
             (w1,w2,cy) = h[i]
             push!(w, xavier(w1,w2,cx,cy))
             push!(w, zeros(1,1,cy,1))
-            x = (div(x1-w1+1,1),div(x2-w2+1,1),cy) # with default padding and pooling parameters
+            x = (div(x1-w1+1,2),div(x2-w2+1,2),cy) # with default padding and pooling parameters
         elseif isa(h[i],Integer)
             push!(w, xavier(h[i],prod(x)))
             push!(w, zeros(h[i],1))
@@ -40,12 +40,12 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
 end
 
 
-function vnet(w,x,; pdrop=(0,0,0))
+function vnet(w,x,; pdrop=(0,0.2,0.2))
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
             x = dropout(x, pdrop[i==1?1:2])
             x=conv4(w[i],x) .+ w[i+1]
-            #x=pool(relu.(x))
+            x=pool(relu.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x = dropout(x, pdrop[i==1?1:3])
             x=w[i]*mat(x) .+ w[i+1]
@@ -99,7 +99,7 @@ your_seed = 1;
 EPOCHS    = 200;
 BATCHSIZE = 100;
 LR        = 0.01;
-h   = ((28,28,1), (5,5,10),(3,3,10), 10);
+h   = ((28,28,1), (5,5,8),(3,3,8), 10);
 
 srand(your_seed)
 
