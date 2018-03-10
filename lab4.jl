@@ -10,6 +10,15 @@ function gzload(file; path="$file", url="http://yann.lecun.com/exdb/mnist/$file"
     return(a)
 end
 
+function loaddata()
+    info("Loading MNIST...")
+    xtrn = gzload("train-images-idx3-ubyte.gz")[17:end]
+    xtst = gzload("t10k-images-idx3-ubyte.gz")[17:end]
+    ytrn = gzload("train-labels-idx1-ubyte.gz")[9:end]
+    ytst = gzload("t10k-labels-idx1-ubyte.gz")[9:end]
+    return (xtrn, ytrn, xtst, ytst)
+end
+
 function initweights(h...)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
     w = Any[]
     x = h[1]
