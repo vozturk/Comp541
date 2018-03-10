@@ -71,6 +71,8 @@ end
 function loss(w,x,ygold)
     ypred=cnn(w,x)
     prob=logp(ypred,[1])
+    println(typeof(ygold))
+    println(typeof(prob))
     J=-sum(ygold.*prob)
     return J
 end
