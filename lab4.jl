@@ -124,7 +124,7 @@ weights = initweights(h);
 #println(accuracy(weights,dtrn)[2])
 #println(accuracy(weights,dtst)[1])
 #println(accuracy(weights,dtst)[2])
-report(epoch)=println((:epoch,epoch,:trn,accuracy(weights,dtrn))
+report(epoch)=println(:epoch,epoch,:trn,accuracy(weights,dtrn))
 report(0)
 
 
