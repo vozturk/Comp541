@@ -122,23 +122,23 @@ dtst=minibatch(xtst, ytst, BATCHSIZE; xtype=KnetArray{Float32}, ytype=KnetArray{
 
 weights = initweights(h);
 
-a=accuracy(weights,dtrn)
-b=accuracy(weights,dtst)
-println(a[1])
-println(a[2])
-println(b[1])
-println(b[2])
-#report(epoch)=println(:epoch,epoch,:trn,accuracy(weights,dtrn),:tst,accuracy(weights,dtst))
-#report(0)
+#a=accuracy(weights,dtrn)
+#b=accuracy(weights,dtst)
+#println(a[1])
+#println(a[2])
+#println(b[1])
+#println(b[2])
+report(epoch)=println(:epoch,epoch,:trn,accuracy(weights,dtrn),:tst,accuracy(weights,dtst))
+report(0)
 
 
 @time for epoch=1:EPOCHS # @time helps you to have an idea about your convergence time
     train(weights, dtrn, LR)
-    #report(epoch)
-    a=accuracy(weights,dtrn)
-    b=accuracy(weights,dtst)
-    println(a[1])
-    println(a[2])
-    println(b[1])
-    println(b[2])
+    report(epoch)
+    ###a=accuracy(weights,dtrn)
+    ##b=accuracy(weights,dtst)
+    #println(a[1])
+    #println(a[2])
+    #println(b[1])
+    #println(b[2])
 end
