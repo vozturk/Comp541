@@ -40,17 +40,17 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
 end
 
 
-function vnet(w,x,; pdrop=(0,0.5,0.5))
+function vnet(w,x,; pdrop=(0,0,0))
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
             x = dropout(x, pdrop[i==1?1:2])
             x=conv4(w[i],x) .+ w[i+1]
-            x=pool(sigm.(x))
+            x=pool(relu.(x))
         elseif ndims(w[i])==2 #it means fully connected layer
             x = dropout(x, pdrop[i==1?1:3])
             x=w[i]*mat(x) .+ w[i+1]
             if i < length(w)-1
-                x = sigm.(x)
+                x = relu.(x)
             end
         end
     end
