@@ -66,8 +66,8 @@ end
 
 lossgradient=grad(loss)
 
-function train(w, dtrn,lr)
-    optim = optimizers(weights, Adadelta)
+function train(w, dtrn,Lr)
+    optim = optimizers(weights, sgd(lr=Lr))
         for (x,y) in dtrn
             g=lossgradient(w,x,y)
             update!(w,g,optim)
@@ -96,10 +96,10 @@ end
 
 # Hyperparameters
 your_seed = 1;
-EPOCHS    = 10000;
+EPOCHS    = 100;
 BATCHSIZE = 100;
 LR        = 0.01;
-h   = ((28,28,1),1000,10)
+h   = ((28,28,1),(50,50,3),10)
 
 srand(your_seed)
 
@@ -120,19 +120,19 @@ dtst=minibatch(xtst, ytst, BATCHSIZE; xtype=KnetArray{Float32}, ytype=KnetArray{
 
 weights = initweights(h);
 
-#println(accuracy(weights,dtrn)[1])
-#println(accuracy(weights,dtrn)[2])
-#println(accuracy(weights,dtst)[1])
-#println(accuracy(weights,dtst)[2])
-report(epoch)=println(:epoch,epoch,:trn,accuracy(weights,dtrn))
-report(0)
+println(accuracy(weights,dtrn)[1])
+println(accuracy(weights,dtrn)[2])
+println(accuracy(weights,dtst)[1])
+println(accuracy(weights,dtst)[2])
+#report(epoch)=println(:epoch,epoch,:trn,accuracy(weights,dtrn))
+#report(0)
 
 
 @time for epoch=1:EPOCHS # @time helps you to have an idea about your convergence time
     train(weights, dtrn, LR)
-    report(epoch)
-    #println(accuracy(weights,dtrn)[1])
-    #println(accuracy(weights,dtrn)[2])
-    #println(accuracy(weights,dtst)[1])
-    #println(accuracy(weights,dtst)[2])
+    #report(epoch)
+    println(accuracy(weights,dtrn)[1])
+    println(accuracy(weights,dtrn)[2])
+    println(accuracy(weights,dtst)[1])
+    println(accuracy(weights,dtst)[2])
 end
