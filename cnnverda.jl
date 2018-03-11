@@ -40,7 +40,7 @@ function initweights(h)  # use cinit(x,h1,h2,...,hn,y) for n hidden layer model
 end
 
 
-function vnet(w,x,; pdrop=(0,0.2,0.2))
+function vnet(w,x,; pdrop=(0,0,0))
     for i=1:2:length(w)
         if ndims(w[i])==4 #it means convolution layer
             x = dropout(x, pdrop[i==1?1:2])
