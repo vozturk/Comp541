@@ -90,7 +90,6 @@ function accuracy(w, batches, i2t)
    ncorrect = 0.0
     ntoken = 0.0
     for (x,y,z) in batches
-        ypred=predict(w,x,z)
         s=size(ypred,2)
         #ypred[ypred.==maximum(ypred,1)] = 1
         #ypred[ypred.!=1] = 0
@@ -104,7 +103,7 @@ function accuracy(w, batches, i2t)
         #for i=1:size(y, 2)
             #ncorrect += indmax(b[:,i]) == y[i] ? 1.0 : 0.0
         #end
-        accuracy(ypred,y)
+        accuracy(predict(w,x,z),y)
         ncorrect += accuracy*s
         ntoken += s
     end
