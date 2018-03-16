@@ -47,7 +47,7 @@ end
 # w[6]   => word embeddings
 # w[7]   => rnnstruct given by rnninit function
 # Hint you mave take a look main function below to better understand its calling convention
-function initweights(atype, hidden, words, tags, embed, mlp, usegpu, winit=0.01)
+function initweights(atype, hidden, words, tags, mlp, embed, usegpu, winit=0.01)
     w = Array{Any}(7)
     # YOUR ANSWER
     we(d...)=atype(randn(d...))
