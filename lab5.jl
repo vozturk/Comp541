@@ -100,9 +100,9 @@ function accuracy(w, batches, i2t)
         #end
        # ygold=convert(KnetArray{Float32},ygold)
         #ncorrect+=sum(ypred.*ygold)
-        b=Array(ypred)
         for i=1:size(y, 2)
-            ncorrect += indmax(b[:,i]) == y[i] ? 1.0 : 0.0
+            b=Array(ypred[:,i])
+            ncorrect += indmax(b) == y[i] ? 1.0 : 0.0
         end
         ntoken += s
     end
