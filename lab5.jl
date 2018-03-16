@@ -102,7 +102,7 @@ function accuracy(w, batches, i2t)
         a=Array(y)
         b=Array(ypred)
         for i=1:size(y, 2)
-            ncorrect += indmax(a[:,i]) == indmax(b[:, i]) ? 1.0 : 0.0
+            ncorrect += indmax(b[:,i]) == a[i]) ? 1.0 : 0.0
         end
          ntoken += size(ypred,2)
     end
