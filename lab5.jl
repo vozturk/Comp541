@@ -91,6 +91,7 @@ function accuracy(w, batches, i2t)
     ntoken = 0.0
     for (x,y,z) in batches
         ypred=predict(w,x,z)
+        s=size(ypred,2)
         #ypred[ypred.==maximum(ypred,1)] = 1
         #ypred[ypred.!=1] = 0
         #ygold=zeros(size(ypred))
@@ -99,11 +100,13 @@ function accuracy(w, batches, i2t)
         #end
        # ygold=convert(KnetArray{Float32},ygold)
         #ncorrect+=sum(ypred.*ygold)
-        b=Array(ypred)
-        for i=1:size(y, 2)
-            ncorrect += indmax(b[:,i]) == y[i] ? 1.0 : 0.0
-        end
-         ntoken += size(ypred,2)
+        #b=Array(ypred)
+        #for i=1:size(y, 2)
+            #ncorrect += indmax(b[:,i]) == y[i] ? 1.0 : 0.0
+        #end
+        accuracy(ypred,y)
+        ncorrect += accuracy*s
+        ntoken += s
     end
     tag_acc=ncorrect/ntoken
 
