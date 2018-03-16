@@ -168,7 +168,7 @@ function main(args)
 
         # validation
         dev_start = now()
-        #tag_acc = accuracy(w, dev, data.i2t)
+        tag_acc = accuracy(w, dev, data.i2t)
         dev_time += Int((now()-dev_start).value)*0.001
         train_time = Int((now()-t0).value)*0.001-dev_time
 
@@ -177,8 +177,8 @@ function main(args)
         all_tagged += this_tagged
         this_loss = this_tagged = 0
         all_time = Int((now()-t0).value)*0.001
-       # @printf("tag_acc=%.4f, time=%.4f, word_per_sec=%.4f\n",
-        #        tag_acc, train_time, all_tagged/train_time)
+        @printf("tag_acc=%.4f, time=%.4f, word_per_sec=%.4f\n",
+                tag_acc, train_time, all_tagged/train_time)
         flush(STDOUT)
     end
 end
