@@ -50,7 +50,7 @@ end
 function initweights(atype, hidden, words, tags, mlp, embed, usegpu, winit=0.01)
     w = Array{Any}(7)
     # YOUR ANSWER
-    we(d...)=atype(randn(d...))
+    we(d...)=atype(winit.*randn(d...))
     bi(d...)=atype(zeros(d...))
     w[2]=we(mlp,2*hidden)
     w[3]=bi(mlp,1)
