@@ -97,6 +97,7 @@ function accuracy(w, batches, i2t)
         for i in 1:length(y)
             ygold[y[i],i]=1
         end
+        ygold=convert(KnetArray{Float32},ygold)
         ncorrect+=sum(ypred.*ygold)
          ntoken += size(ypred,2)
     end
