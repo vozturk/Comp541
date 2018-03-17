@@ -90,7 +90,6 @@ function accuracy(w, batches, i2t)
    ncorrect = 0.0
     ntoken = 0.0
     for (x,y,z) in batches
-        s=size(y,2)
         ypred=predict(w,x,z)
         ypred[ypred.==maximum(ypred,1)] = 1
         ypred[ypred.!=1] = 0
@@ -104,7 +103,7 @@ function accuracy(w, batches, i2t)
          #   b=Array(ypred[:,i])
           #  ncorrect += indmax(b) == y[i] ? 1.0 : 0.0
         #end
-        ntoken += s
+        ntoken += size(ypred,2)
     end
     tag_acc=ncorrect/ntoken
 
